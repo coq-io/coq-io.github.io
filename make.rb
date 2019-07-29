@@ -1,3 +1,6 @@
+require 'erb'
+include ERB::Util
+
 packages = [
   {name: "coq-io", namespace: "Io"},
   {name: "coq-io-system", namespace: "Io.System"},
@@ -24,4 +27,8 @@ for package in packages do
       end
     end
   end
+end
+
+File.open("doc/index.html", "w") do |f|
+  f << ERB.new(File.read("doc/index.html.erb", encoding: "UTF-8")).result(binding)
 end
