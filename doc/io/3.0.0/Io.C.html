@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Io.C</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Io.C</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Io.Effect.html#"><span class="id" title="library">Effect</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The description of a computation. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Inductive</span> <a name="t"><span class="id" title="inductive">t</span></a> (<span class="id" title="var">E</span> : <a class="idref" href="Io.Effect.html#t"><span class="id" title="record">Effect.t</span></a>) : <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span> :=<br/>
+| <a name="Ret"><span class="id" title="constructor">Ret</span></a> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">x</span> : <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a>), <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a><br/>
+| <a name="Call"><span class="id" title="constructor">Call</span></a> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">command</span> : <a class="idref" href="Io.Effect.html#command"><span class="id" title="projection">Effect.command</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a>), <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> (<a class="idref" href="Io.Effect.html#answer"><span class="id" title="projection">Effect.answer</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#command"><span class="id" title="variable">command</span></a>)<br/>
+| <a name="Let"><span class="id" title="constructor">Let</span></a> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>}, <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">(</span></a><a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a><br/>
+| <a name="Join"><span class="id" title="constructor">Join</span></a> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>}, <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> (<a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a>)<br/>
+| <a name="First"><span class="id" title="constructor">First</span></a> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>}, <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">→</span></a> <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> (<a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Datatypes.html#e03f39daf98516fa530d3f6f5a1b4d92"><span class="id" title="notation">+</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a>).<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Io.C.html#Ret"><span class="id" title="constructor">Ret</span></a> {<span class="id" title="var">E</span> <span class="id" title="var">A</span>} <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Io.C.html#Call"><span class="id" title="constructor">Call</span></a> <span class="id" title="var">E</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Io.C.html#Let"><span class="id" title="constructor">Let</span></a> {<span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Io.C.html#Join"><span class="id" title="constructor">Join</span></a> {<span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Io.C.html#First"><span class="id" title="constructor">First</span></a> {<span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A nicer notation for `Ret`. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="ret"><span class="id" title="definition">ret</span></a> {<span class="id" title="var">E</span> : <a class="idref" href="Io.Effect.html#t"><span class="id" title="record">Effect.t</span></a>} {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">x</span> : <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Io.C.html#Ret"><span class="id" title="constructor">Ret</span></a> <a class="idref" href="Io.C.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A nicer notation for `Call`. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="call"><span class="id" title="definition">call</span></a> (<span class="id" title="var">E</span> : <a class="idref" href="Io.Effect.html#t"><span class="id" title="record">Effect.t</span></a>) (<span class="id" title="var">command</span> : <a class="idref" href="Io.Effect.html#command"><span class="id" title="projection">Effect.command</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> (<a class="idref" href="Io.Effect.html#answer"><span class="id" title="projection">Effect.answer</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#command"><span class="id" title="variable">command</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Io.C.html#Call"><span class="id" title="constructor">Call</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#command"><span class="id" title="variable">command</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A nicer notation for `Join`. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="join"><span class="id" title="definition">join</span></a> {<span class="id" title="var">E</span> : <a class="idref" href="Io.Effect.html#t"><span class="id" title="record">Effect.t</span></a>} {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">x</span> : <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">y</span> : <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> (<a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Io.C.html#Join"><span class="id" title="constructor">Join</span></a> <a class="idref" href="Io.C.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="Io.C.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A nicer notation for `First`. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="first"><span class="id" title="definition">first</span></a> {<span class="id" title="var">E</span> : <a class="idref" href="Io.Effect.html#t"><span class="id" title="record">Effect.t</span></a>} {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">x</span> : <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a>) (<span class="id" title="var">y</span> : <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">t</span></a> <a class="idref" href="Io.C.html#E"><span class="id" title="variable">E</span></a> (<a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Datatypes.html#e03f39daf98516fa530d3f6f5a1b4d92"><span class="id" title="notation">+</span></a> <a class="idref" href="Io.C.html#B"><span class="id" title="variable">B</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Io.C.html#First"><span class="id" title="constructor">First</span></a> <a class="idref" href="Io.C.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="Io.C.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A run from an effect to a more general effect. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <a name="run"><span class="id" title="definition">run</span></a> {<span class="id" title="var">E1</span> <span class="id" title="var">E2</span> : <a class="idref" href="Io.Effect.html#t"><span class="id" title="record">Effect.t</span></a>} {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;(<span class="id" title="var">run_command</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">c</span> : <a class="idref" href="Io.Effect.html#command"><span class="id" title="projection">Effect.command</span></a> <a class="idref" href="Io.C.html#E1"><span class="id" title="variable">E1</span></a>), <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">C.t</span></a> <a class="idref" href="Io.C.html#E2"><span class="id" title="variable">E2</span></a> (<a class="idref" href="Io.Effect.html#answer"><span class="id" title="projection">Effect.answer</span></a> <a class="idref" href="Io.C.html#E1"><span class="id" title="variable">E1</span></a> <a class="idref" href="Io.C.html#c"><span class="id" title="variable">c</span></a>))<br/>
+&nbsp;&nbsp;(<span class="id" title="var">x</span> : <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">C.t</span></a> <a class="idref" href="Io.C.html#E1"><span class="id" title="variable">E1</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="Io.C.html#t"><span class="id" title="inductive">C.t</span></a> <a class="idref" href="Io.C.html#E2"><span class="id" title="variable">E2</span></a> <a class="idref" href="Io.C.html#A"><span class="id" title="variable">A</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">A</span> <span class="id" title="var">x</span> | <span class="id" title="var">c</span> | <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">x</span> <span class="id" title="var">f</span> | <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> | <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>].<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="Io.C.html#Ret"><span class="id" title="constructor">C.Ret</span></a> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<span class="id" title="var">run_command</span> <span class="id" title="var">c</span>).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="Io.C.html#Let"><span class="id" title="constructor">C.Let</span></a> (<span class="id" title="var">run</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">run_command</span> <span class="id" title="var">x</span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">run</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">run_command</span> (<span class="id" title="var">f</span> <a class="idref" href="Io.C.html#x"><span class="id" title="variable">x</span></a>))).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="Io.C.html#Join"><span class="id" title="constructor">C.Join</span></a> (<span class="id" title="var">run</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">run_command</span> <span class="id" title="var">x</span>) (<span class="id" title="var">run</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">run_command</span> <span class="id" title="var">y</span>)).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">exact</span> (<a class="idref" href="Io.C.html#First"><span class="id" title="constructor">C.First</span></a> (<span class="id" title="var">run</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">run_command</span> <span class="id" title="var">x</span>) (<span class="id" title="var">run</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">run_command</span> <span class="id" title="var">y</span>)).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Some optional notations. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Module</span> <a name="Notations"><span class="id" title="module">Notations</span></a>.<br/>
+</div>
+
+<div class="doc">
+A nicer notation for `Let`. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a name="accad18fb2af0d23ac803a83b4613a07"><span class="id" title="notation">&quot;</span></a>'let!' x ':=' X 'in' Y" :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Io.C.html#Let"><span class="id" title="constructor">Let</span></a> <span class="id" title="var">X</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">Y</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">x</span> <span class="id" title="var">ident</span>, <span class="id" title="var">X</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">Y</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Let with a typed answer. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a name="557a80de11d644afafa5f45e2da6f63d"><span class="id" title="notation">&quot;</span></a>'let!' x : A ':=' X 'in' Y" :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Io.C.html#Let"><span class="id" title="constructor">Let</span></a> <span class="id" title="var">X</span> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) ⇒ <span class="id" title="var">Y</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">x</span> <span class="id" title="var">ident</span>, <span class="id" title="var">X</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">A</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">Y</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Let ignoring the unit answer. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a name="b618adbdc7fc65876e8e8e19cee8cd0a"><span class="id" title="notation">&quot;</span></a>'do!' X 'in' Y" :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Io.C.html#Let"><span class="id" title="constructor">Let</span></a> <span class="id" title="var">X</span> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">_</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.9.1/stdlib//Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>) ⇒ <span class="id" title="var">Y</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">X</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">Y</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200).<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Io.C.html#Notations"><span class="id" title="module">Notations</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

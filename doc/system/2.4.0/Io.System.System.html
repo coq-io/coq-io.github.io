@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Io.System.System</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Io.System.System</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Lists.List.html#"><span class="id" title="library">Coq.Lists.List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.ZArith.ZArith.html#"><span class="id" title="library">Coq.ZArith.ZArith</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">ListString.All</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Io.All</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">C.Notations</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The System commands. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Inductive</span> <a name="t"><span class="id" title="inductive">t</span></a> :=<br/>
+| <a name="ListFiles"><span class="id" title="constructor">ListFiles</span></a> (<span class="id" title="var">directory</span> : <span class="id" title="definition">LString.t</span>)<br/>
+| <a name="ReadFile"><span class="id" title="constructor">ReadFile</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>)<br/>
+| <a name="WriteFile"><span class="id" title="constructor">WriteFile</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>) (<span class="id" title="var">content</span> : <span class="id" title="definition">LString.t</span>)<br/>
+| <a name="DeleteFile"><span class="id" title="constructor">DeleteFile</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>)<br/>
+| <a name="System"><span class="id" title="constructor">System</span></a> (<span class="id" title="var">command</span> : <span class="id" title="definition">LString.t</span>)<br/>
+| <span class="id" title="keyword">Eval</span> (<span class="id" title="var">command</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="definition">LString.t</span>)<br/>
+| <span class="id" title="keyword">Print</span> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>)<br/>
+| <a name="ReadLine"><span class="id" title="constructor">ReadLine</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The answers to System commands. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="answer"><span class="id" title="definition">answer</span></a> (<span class="id" title="var">command</span> : <a class="idref" href="Io.System.System.html#t"><span class="id" title="inductive">t</span></a>) : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Io.System.System.html#command"><span class="id" title="variable">command</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Io.System.System.html#ListFiles"><span class="id" title="constructor">ListFiles</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="Io.System.System.html#ReadFile"><span class="id" title="constructor">ReadFile</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <span class="id" title="definition">LString.t</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="Io.System.System.html#WriteFile"><span class="id" title="constructor">WriteFile</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="Io.System.System.html#DeleteFile"><span class="id" title="constructor">DeleteFile</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="Io.System.System.html#System"><span class="id" title="constructor">System</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="keyword">Eval</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b5"><span class="id" title="notation">×</span></a> <span class="id" title="definition">LString.t</span> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b5"><span class="id" title="notation">×</span></a> <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="keyword">Print</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="Io.System.System.html#ReadLine"><span class="id" title="constructor">ReadLine</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <span class="id" title="definition">LString.t</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The definition of the system effect. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="effect"><span class="id" title="definition">effect</span></a> : <span class="id" title="record">Effect.t</span> := {|<br/>
+&nbsp;&nbsp;<span class="id" title="constructor">Effect.command</span> <span class="id" title="constructor">:=</span> <span class="id" title="constructor">t</span><span class="id" title="constructor">;</span><br/>
+&nbsp;&nbsp;<span class="id" title="constructor">Effect.answer</span> <span class="id" title="constructor">:=</span> <span class="id" title="constructor">answer</span> |}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+List the files of a directory. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="list_files"><span class="id" title="definition">list_files</span></a> (<span class="id" title="var">directory</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="definition">LString.t</span>)) :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="Io.System.System.html#ListFiles"><span class="id" title="constructor">ListFiles</span></a> <a class="idref" href="Io.System.System.html#directory"><span class="id" title="variable">directory</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Read the content of a file. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="read_file"><span class="id" title="definition">read_file</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <span class="id" title="definition">LString.t</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="Io.System.System.html#ReadFile"><span class="id" title="constructor">ReadFile</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Update (or create) a file with some content. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="write_file"><span class="id" title="definition">write_file</span></a> (<span class="id" title="var">file_name</span> <span class="id" title="var">content</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="Io.System.System.html#WriteFile"><span class="id" title="constructor">WriteFile</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a> <a class="idref" href="Io.System.System.html#content"><span class="id" title="variable">content</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Delete a file. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="delete_file"><span class="id" title="definition">delete_file</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="Io.System.System.html#DeleteFile"><span class="id" title="constructor">DeleteFile</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Run a command. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="system"><span class="id" title="definition">system</span></a> (<span class="id" title="var">command</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="Io.System.System.html#System"><span class="id" title="constructor">System</span></a> <a class="idref" href="Io.System.System.html#command"><span class="id" title="variable">command</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Run a command controlling the outputs. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="eval"><span class="id" title="definition">eval</span></a> (<span class="id" title="var">command</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b5"><span class="id" title="notation">×</span></a> <span class="id" title="definition">LString.t</span> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b5"><span class="id" title="notation">×</span></a> <span class="id" title="definition">LString.t</span>)) :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<span class="id" title="keyword">Eval</span> <a class="idref" href="Io.System.System.html#command"><span class="id" title="variable">command</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Print a message on the standard output. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="print"><span class="id" title="definition">print</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<span class="id" title="keyword">Print</span> <a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Print a message with an end of line on the standard output. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="printl"><span class="id" title="definition">printl</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<span class="id" title="keyword">Print</span> (<a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">[</span></a><span class="id" title="definition">LString.Char.n</span><a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">]</span></a>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Print a message with an end of line without checking the outcome. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="log"><span class="id" title="definition">log</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span><span class="id" title="notation">!</span> <span class="id" title="var">is_success</span> <span class="id" title="notation">:=</span> <a class="idref" href="Io.System.System.html#printl"><span class="id" title="definition">printl</span></a> <a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a> <span class="id" title="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="definition">ret</span> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Read a line on the standard input. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="read_line"><span class="id" title="definition">read_line</span></a> : <span class="id" title="inductive">C.t</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <span class="id" title="definition">LString.t</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">call</span> <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a> <a class="idref" href="Io.System.System.html#ReadLine"><span class="id" title="constructor">ReadLine</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Some basic scenarios. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Module</span> <a name="Run"><span class="id" title="module">Run</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Io.Run</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.list_files_ok"><span class="id" title="definition">list_files_ok</span></a> (<span class="id" title="var">directory</span> : <span class="id" title="definition">LString.t</span>) (<span class="id" title="var">files</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#list_files"><span class="id" title="definition">list_files</span></a> <a class="idref" href="Io.System.System.html#directory"><span class="id" title="variable">directory</span></a>) (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Io.System.System.html#files"><span class="id" title="variable">files</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#ListFiles"><span class="id" title="constructor">ListFiles</span></a> <span class="id" title="var">directory</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.list_files_error"><span class="id" title="definition">list_files_error</span></a> (<span class="id" title="var">directory</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#list_files"><span class="id" title="definition">list_files</span></a> <a class="idref" href="Io.System.System.html#directory"><span class="id" title="variable">directory</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#ListFiles"><span class="id" title="constructor">ListFiles</span></a> <span class="id" title="var">directory</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.read_file_ok"><span class="id" title="definition">read_file_ok</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>) (<span class="id" title="var">content</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#read_file"><span class="id" title="definition">read_file</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a>) (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Io.System.System.html#content"><span class="id" title="variable">content</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#ReadFile"><span class="id" title="constructor">ReadFile</span></a> <span class="id" title="var">file_name</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.read_file_error"><span class="id" title="definition">read_file_error</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#read_file"><span class="id" title="definition">read_file</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#ReadFile"><span class="id" title="constructor">ReadFile</span></a> <span class="id" title="var">file_name</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.write_file_ok"><span class="id" title="definition">write_file_ok</span></a> (<span class="id" title="var">file_name</span> <span class="id" title="var">content</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#write_file"><span class="id" title="definition">write_file</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a> <a class="idref" href="Io.System.System.html#content"><span class="id" title="variable">content</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#WriteFile"><span class="id" title="constructor">WriteFile</span></a> <span class="id" title="var">file_name</span> <span class="id" title="var">content</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.write_file_error"><span class="id" title="definition">write_file_error</span></a> (<span class="id" title="var">file_name</span> <span class="id" title="var">content</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#write_file"><span class="id" title="definition">write_file</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a> <a class="idref" href="Io.System.System.html#content"><span class="id" title="variable">content</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#WriteFile"><span class="id" title="constructor">WriteFile</span></a> <span class="id" title="var">file_name</span> <span class="id" title="var">content</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.delete_file_ok"><span class="id" title="definition">delete_file_ok</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#delete_file"><span class="id" title="definition">delete_file</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#DeleteFile"><span class="id" title="constructor">DeleteFile</span></a> <span class="id" title="var">file_name</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.delete_file_error"><span class="id" title="definition">delete_file_error</span></a> (<span class="id" title="var">file_name</span> : <span class="id" title="definition">LString.t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#delete_file"><span class="id" title="definition">delete_file</span></a> <a class="idref" href="Io.System.System.html#file_name"><span class="id" title="variable">file_name</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#DeleteFile"><span class="id" title="constructor">DeleteFile</span></a> <span class="id" title="var">file_name</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.system_ok"><span class="id" title="definition">system_ok</span></a> (<span class="id" title="var">command</span> : <span class="id" title="definition">LString.t</span>) (<span class="id" title="var">is_success</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#system"><span class="id" title="definition">system</span></a> <a class="idref" href="Io.System.System.html#command"><span class="id" title="variable">command</span></a>) (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Io.System.System.html#is_success"><span class="id" title="variable">is_success</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#System"><span class="id" title="constructor">System</span></a> <span class="id" title="var">command</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.system_error"><span class="id" title="definition">system_error</span></a> (<span class="id" title="var">command</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#system"><span class="id" title="definition">system</span></a> <a class="idref" href="Io.System.System.html#command"><span class="id" title="variable">command</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<a class="idref" href="Io.System.System.html#System"><span class="id" title="constructor">System</span></a> <span class="id" title="var">command</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.print_ok"><span class="id" title="definition">print_ok</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#print"><span class="id" title="definition">print</span></a> <a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<span class="id" title="keyword">Print</span> <span class="id" title="var">message</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.print_error"><span class="id" title="definition">print_error</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#print"><span class="id" title="definition">print</span></a> <a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) (<span class="id" title="keyword">Print</span> <span class="id" title="var">message</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.printl_ok"><span class="id" title="definition">printl_ok</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#printl"><span class="id" title="definition">printl</span></a> <a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="Io.System.System.html#Run.print_ok"><span class="id" title="definition">print_ok</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.printl_error"><span class="id" title="definition">printl_error</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#printl"><span class="id" title="definition">printl</span></a> <a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="Io.System.System.html#Run.print_error"><span class="id" title="definition">print_error</span></a> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.log_ok"><span class="id" title="definition">log_ok</span></a> (<span class="id" title="var">message</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">Run.t</span> (<a class="idref" href="Io.System.System.html#log"><span class="id" title="definition">log</span></a> <a class="idref" href="Io.System.System.html#message"><span class="id" title="variable">message</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="keyword">Let</span> (<a class="idref" href="Io.System.System.html#Run.printl_ok"><span class="id" title="definition">printl_ok</span></a> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">Ret</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.read_line_ok"><span class="id" title="definition">read_line_ok</span></a> (<span class="id" title="var">line</span> : <span class="id" title="definition">LString.t</span>) : <span class="id" title="inductive">Run.t</span> <a class="idref" href="Io.System.System.html#read_line"><span class="id" title="definition">read_line</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Io.System.System.html#line"><span class="id" title="variable">line</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) <a class="idref" href="Io.System.System.html#ReadLine"><span class="id" title="constructor">ReadLine</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <span class="id" title="var">line</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="Run.read_line_error"><span class="id" title="definition">read_line_error</span></a> : <span class="id" title="inductive">Run.t</span> <a class="idref" href="Io.System.System.html#read_line"><span class="id" title="definition">read_line</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="constructor">Call</span> (<span class="id" title="var">E</span> := <a class="idref" href="Io.System.System.html#effect"><span class="id" title="definition">effect</span></a>) <a class="idref" href="Io.System.System.html#ReadLine"><span class="id" title="constructor">ReadLine</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.5pl3/stdlib/Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Io.System.System.html#Run"><span class="id" title="module">Run</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

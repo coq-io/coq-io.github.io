@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coq.io documentation</title>
+  </head>
+  <body>
+    <h1>Documentation of <a href="http://coq.io/">Coq.io</a> libraries</h1>
+    <ul>
+    <% for package in Dir.glob("doc/*").sort do %>
+      <% if File.directory?(package) then %>
+        <% package_name = File.basename(package) %>
+        <li><%= package_name %>:</li>
+        <ul>
+        <% for version in Dir.glob("#{package}/*").sort do %>
+          <% version_name = File.basename(version) %>
+          <li><a href="<%= "#{package_name}/#{version_name}/toc.html" %>"><%= version_name %></a></li>
+        <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+    </ul>
+  </body>
+</html>
